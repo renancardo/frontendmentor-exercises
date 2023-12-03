@@ -1,0 +1,245 @@
+---
+
+import { Image } from 'astro:assets';
+import reactionIcon from "./assets/images/icon-reaction.svg";
+import memoryIcon from "./assets/images/icon-memory.svg";
+import verbalIcon from "./assets/images/icon-verbal.svg";
+import visualIcon from "./assets/images/icon-visual.svg";
+import favicon from './assets/images/favicon-32x32.png';
+const results = [
+  {
+    "category": "Reaction",
+    "score": 80,
+    "icon": reactionIcon,
+    "backgroundColor": "#FF555511",
+    color: "#FF5555",
+  },
+  {
+    "category": "Memory",
+    "score": 92,
+    "icon": memoryIcon,
+    "backgroundColor": "#FFB21E11",
+    "color": "#FFB21E",
+  },
+  {
+    "category": "Verbal",
+    "score": 61,
+    "icon": verbalIcon,
+    "backgroundColor": "#00BB8F11",
+    "color": "#00BB8F",
+  },
+  {
+    "category": "Visual",
+    "score": 72,
+    "icon": visualIcon,
+    "backgroundColor": "#1125D611",
+    "color": "#1125D6",
+  }
+]
+
+---
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="description" content="Astro description" />
+		<meta name="viewport" content="width=device-width" />
+		<link rel="icon" type="image/svg+xml" href={favicon.src} />
+		<meta name="generator" content={Astro.generator} />
+		<title>Result Summary Component</title>
+	</head>
+<body>
+  <div class='container'>
+    <div class='score'>
+      <span class='headingM'>Your Results</span>
+      <div class='score__result'>
+        <div class='headingXL'>76</div>
+        <div class='bodyBold'>of 100</div>
+      </div>
+      <div class='headingL'>Great</div>
+      <div class='body'>You scored higher than 65% of the peaple who have taken this test</div>
+    </div>
+    <div class='details'>
+      <div class='resultContainer'>
+        <div class='headingM summaryColor'>Summary</div>
+        {results.map(result => (
+          <div class="result" style={`background-color: ${result.backgroundColor};`}>
+            <Image src={result.icon} alt={result.category} />
+            <div style={`color: ${result.color}`}>{result.category}</div>
+            <div style="font-weight: 800">{result.score} <span style="opacity: 0.5;">/ 100</span></div>
+          </div>
+        ))}
+      </div>
+      <button class='details__button'>Continue</button>
+    </div>
+  </div>
+</body>
+
+<style> 
+
+@font-face {
+  font-family: 'Hanken Grotesk';
+  src: url('./assets/fonts/HankenGrotesk-VariableFont_wght.ttf') format('ttf');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+* {
+  box-sizing: border-box;
+  font-family: 'Hanken Grotesk';
+}
+
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 20px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  width: 736px;
+  margin: 0 auto;
+}
+
+.score {
+  color: #fff;
+  padding: 38px 70px;
+  width: 368px;
+  height: 512px;
+  flex-shrink: 0;
+  background: var(--Gradient-1, linear-gradient(180deg, #75F 0%, #6943FF 0.01%, #2F2CE9 100%));
+  border-radius: 32px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  
+
+  .score__result {
+    width: 200px;
+    height: 200px;
+    flex-shrink: 0;
+    border-radius: 50%;
+    background: var(--Gradient-2, linear-gradient(180deg, #4D21C9 0%, rgba(37, 33, 201, 0.00) 100%, rgba(37, 33, 201, 0.00) 100%));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+  }
+}
+
+.details {
+  padding: 38px 40px;
+  width: 736px;
+  height: 512px;    
+  background: var(--White, #FFF);
+  border-bottom-right-radius: 20px;
+  border-top-right-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.headingM {
+  color: var(--Light-Blue, #CAC9FF);
+  font-feature-settings: 'clig' off, 'liga' off;
+
+  /* Heading M */
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+}
+
+.headingXL {
+  color: var(--White, #FFF);
+  text-align: center;
+  font-feature-settings: 'clig' off, 'liga' off;
+
+  /* Heading XL */
+  font-size: 72px;
+  font-style: normal;
+  font-weight: 800;
+  line-height: 72px; /* 100% */
+}
+
+.bodyBold {
+  color: var(--Light-Blue, #CAC9FF);
+  font-feature-settings: 'clig' off, 'liga' off;
+  /* Body (Bold) */
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+}
+
+.headingL {
+  color: var(--White, #FFF);
+  text-align: center;
+  font-feature-settings: 'clig' off, 'liga' off;
+  /* Heading L */
+  font-size: 32px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+}
+
+.body {
+  color: var(--Light-Blue, #CAC9FF);
+  text-align: center;
+  font-feature-settings: 'clig' off, 'liga' off;
+  /* Body */
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+}
+
+.result {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  gap: 16px;
+  padding: 16px;
+  height: 56px;
+  background-color: antiquewhite;
+  border-radius: 8px;
+  align-items: center;
+}
+
+.resultContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.summaryColor {
+  color: var(--Dark-Navy, #303B59);
+}
+
+.details__button {
+  cursor: pointer;
+  width: 288px;
+  height: 56px;
+  flex-shrink: 0;
+  border-radius: 128px;
+  background-color: var(--Dark-Navy, #303B59);
+  color: #fff;
+  outline: auto;
+  transition: background-color 0.3s ease;
+ 
+  &:hover {
+    background-color: var(--Gradient-1, #6943FF);
+  }
+
+  &:active {
+    background-color: var(--Gradient-1, #6943FFDD);
+  }
+}
+
+
+</style>
